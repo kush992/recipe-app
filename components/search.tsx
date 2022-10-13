@@ -62,27 +62,3 @@ const Search = () => {
 }
 
 export default Search
-
-
-
-{/* <form className='search__form'>
-                <div className='search__input-wrapper'>
-                    <input
-                        placeholder="type to search for recipes..."
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        className='search__input'
-                        onFocus={onFocus}
-                    />
-                    <div className='search__history-container'>
-                        {showHistory && (
-                            ar?.slice(-10).reverse().map((item: SearchHistoryInterface, index: number) => {
-                                return (
-                                    <SearchHistory key={index} onClickIngredient={() => setQueryFromHistory(item.ingredientName)} ingredientName={item.ingredientName} />
-                                )
-                            })
-                        )}
-                    </div>
-                </div>
-                <button onClick={handleSearch} className={`search__button ${disabledButton ? 'disabled__button' : ''}`} disabled={disabledButton}>Submit</button>
-            </form> */}
