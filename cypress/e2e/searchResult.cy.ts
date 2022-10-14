@@ -11,3 +11,5 @@ context('searchPage', ()=>{
         cy.get('.css-11crptk').contains('apple')
     })
 })
+
+export {}

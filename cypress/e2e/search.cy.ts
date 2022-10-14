@@ -8,3 +8,5 @@ context('searchPage', ()=>{
         cy.get('h1').contains('Search')
     })
 })
+
+export {}

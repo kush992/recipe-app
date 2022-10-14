@@ -16,6 +16,7 @@ const Search = () => {
     const handleSearch = async () => {
         setShowHistory(false);
         setIsLoading(true);
+        setSearchHistory(query);
         try {
             const data = await fetchRecipe(query);
             setRecipe(data.results);
@@ -24,7 +25,6 @@ const Search = () => {
             console.error(error);
         }
 
-        setSearchHistory(query);
     }
 
     const setQueryFromHistory = (historyValue: string) => {

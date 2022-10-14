@@ -9,3 +9,5 @@ context('searchPage', ()=>{
         cy.get('button').click()
     })
 })
+
+export {}
