@@ -4,7 +4,7 @@ const URL = 'https://api.spoonacular.com/food/ingredients/search';
 export const fetchRecipe = async (query: string) => {
 	const response = fetch(`/api/fetchRecipe?query=${query}`);
 
-	return response;
+	return (await response).json();
 };
 
 export const setSearchHistory = (query: string) => {

@@ -8,6 +8,7 @@ interface Props {
     query: string;
     showHistory: boolean;
     disabledButton: boolean;
+	isLoading: boolean;
     onFocus: () => void;
     handleSearch: () => void;
     setQuery: (e: any) => void;
@@ -18,7 +19,7 @@ const SearchForm = (props: Props) => {
 
     return (
         <>
-            <FormControl className='search__form'>
+            <FormControl className='search__form' onSubmit={props.handleSearch}>
                 <div className='search__input-wrapper'>
                     <Input
                         placeholder='type to search for recipes...'
@@ -37,7 +38,7 @@ const SearchForm = (props: Props) => {
                         )}
                     </div>
                 </div>
-                <Button onClick={props.handleSearch} className={`search__button ${props.disabledButton ? 'disabled__button' : ''}`} disabled={props.disabledButton}>Submit</Button>
+                <Button onClick={props.handleSearch} className={`search__button ${props.disabledButton || props.isLoading ? 'disabled__button' : ''}`} disabled={props.disabledButton}>Submit</Button>
             </FormControl>
         </>
     )
