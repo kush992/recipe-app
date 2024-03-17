@@ -2,16 +2,13 @@ import '../styles/globals.css';
 import '../styles/custom.css';
 import type { AppProps } from 'next/app';
 
-import Header from '../src/components/Header';
-import Footer from '../src/components/Footer';
+import Layout from '../src/components/Layout';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
 	return (
-		<div>
-			<Header />
+		<Layout>
 			<Component {...pageProps} />
-			<Footer />
-		</div>
+		</Layout>
 	);
 };
 
