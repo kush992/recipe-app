@@ -36,7 +36,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 	}
 
 	const { recipeId } = params;
-	const response = await fetch(`${baseUrl}/api/getRecipeById?id=${recipeId}`);
+	const response = await fetch(`${baseUrl}/getRecipeById?id=${recipeId}`);
 
 	if (!response.ok) {
 		console.error(`Error: ${response.status} - ${response.statusText}`);
