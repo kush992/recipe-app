@@ -1,8 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { API_KEY } from '../../src/common/utility';
 
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
-
-// Create an in-memory cache
 const cache = new Map();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -11,7 +9,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	// If the data is in the cache, use it
 	if (cache.has(URL)) {
-		console.log('cache', cache.get(URL));
 		res.status(200).json(cache.get(URL));
 		return;
 	}
@@ -20,13 +17,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	if (!response.ok) {
 		console.error(`Error: ${response.status} - ${response.statusText}`);
-		res.status(500).send(`Error: ${response.status} - ${response.statusText}`);
+		res.status(response.status).send(`Error: ${response.status} - ${response.statusText}`);
 		return;
 	}
 
 	const data = await response.json();
 
-	// Store the data in the cache
+	
 	cache.set(URL, data);
 
 	res.status(200).json(data);

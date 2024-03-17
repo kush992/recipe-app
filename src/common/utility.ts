@@ -1,5 +1,5 @@
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
-const URL = 'https://api.spoonacular.com/food/ingredients/search';
+export const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+export const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
 
 export const fetchRecipe = async (query: string) => {
 	const response = fetch(`/api/fetchRecipe?query=${query}`);

@@ -2,6 +2,7 @@ import Head from 'next/head';
 import HomePage from '../src/components/HomePage';
 import { RecipeSearch } from '../src/shared/types/RecipeSearch';
 import { DataWithPagination } from '../src/shared/types/DataWithPagination';
+import { baseUrl } from '../src/common/utility';
 
 interface Props {
 	recipeData: RecipeSearch[];
@@ -24,7 +25,6 @@ const Home = ({ recipeData }: Props) => {
 export default Home;
 
 export async function getServerSideProps() {
-	const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
 	const response = await fetch(`${baseUrl}/api/searchRecipeByTime?maxReadyTime=30&limit=3`);
 
 	if (!response.ok) {

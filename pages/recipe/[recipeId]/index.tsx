@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { RecipeDetailedInfo } from '../../../src/shared/types/RecipeDetailedInfo';
 import { GetServerSidePropsContext } from 'next';
+import { baseUrl } from '../../../src/common/utility';
 
 interface Props {
 	recipeData: RecipeDetailedInfo;
@@ -16,7 +17,7 @@ const Recipe = ({ recipeData }: Props) => {
 			</Head>
 
 			{recipeData.title}
-			<div dangerouslySetInnerHTML={{__html: recipeData.instructions}} />
+			<div dangerouslySetInnerHTML={{ __html: recipeData.instructions }} />
 		</div>
 	);
 };
@@ -33,8 +34,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 			},
 		};
 	}
+
 	const { recipeId } = params;
-	const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
 	const response = await fetch(`${baseUrl}/api/getRecipeById?id=${recipeId}`);
 
 	if (!response.ok) {
