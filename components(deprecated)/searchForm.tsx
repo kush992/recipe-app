@@ -1,6 +1,6 @@
 import React from 'react'
 import { FormControl, Input, Button } from '@chakra-ui/react'
-import { SearchHistoryInterface } from '../common/interface'
+import { SearchHistoryInterface } from '../src/common/interface'
 import SearchHistory from './searchHistory'
 
 interface Props {

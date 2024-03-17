@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { fetchRecipe, setSearchHistory } from '../common/utility';
-import { IngredientResponseInterface } from '../common/interface';
+import { fetchRecipe, setSearchHistory } from '../src/common/utility';
+import { IngredientResponseInterface } from '../src/common/interface';
 import RecipeCard from './recipeCard';
 import SearchForm from './searchForm';
 
