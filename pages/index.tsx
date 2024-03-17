@@ -1,8 +1,13 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
 import HomePage from '../src/components/HomePage';
+import { RecipeSearch } from '../src/shared/types/RecipeSearch';
+import { DataWithPagination } from '../src/shared/types/DataWithPagination';
 
-const Home: NextPage = () => {
+interface Props {
+	recipeData: RecipeSearch[];
+}
+
+const Home = ({ recipeData }: Props) => {
 	return (
 		<div className='max-w-7xl mx-auto mt-2 p-6'>
 			<Head>
@@ -11,9 +16,32 @@ const Home: NextPage = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<HomePage />
+			<HomePage recipeData={recipeData} />
 		</div>
 	);
 };
 
 export default Home;
+
+export async function getServerSideProps() {
+	const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+	const response = await fetch(`${baseUrl}/api/searchRecipeByTime?maxReadyTime=30&limit=3`);
+
+	if (!response.ok) {
+		console.error(`Error: ${response.status} - ${response.statusText}`);
+		return {
+			props: {
+				error: `Error: ${response.status} - ${response.statusText}`,
+				recipeData: [],
+			},
+		};
+	}
+
+	const recipeData: DataWithPagination<RecipeSearch> = await response.json();
+
+	return {
+		props: {
+			recipeData: recipeData.results,
+		},
+	};
+}

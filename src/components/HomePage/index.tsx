@@ -1,8 +1,15 @@
 import React from 'react';
 import Image from 'next/image';
 import HomePageBanner from './HomePageBanner';
+import { RecipeSearch } from '../../shared/types/RecipeSearch';
+import Card from '../../shared/components/Card';
+import { RouteNames } from '../../shared/Enums/RouteNames';
 
-const HomePage = () => {
+interface Props {
+	recipeData: RecipeSearch[];
+}
+
+const HomePage = ({ recipeData }: Props) => {
 	return (
 		<div>
 			<HomePageBanner />
@@ -41,6 +48,66 @@ const HomePage = () => {
 					<p>Collect your favourite products</p>
 				</a>
 			</div>
+
+			<section>
+				<h3 className='text-2xl font-bold dark:text-white'>Recipes under 30mins</h3>
+				<div className='grid grid-cols-1 md:grid-cols-3 gap-4 p-6'>
+					{recipeData?.map((recipe) => (
+						<Card
+							key={recipe.id}
+							imageAlt={recipe.title}
+							imageUrl={recipe.image}
+							title={recipe.title}
+							redirectionLink={`${RouteNames.RECIPE}/${recipe.id}`}
+						/>
+					))}
+				</div>
+			</section>
+
+			<section>
+				<h3 className='text-2xl font-bold dark:text-white'>Vegan Recipes</h3>
+				<div className='grid grid-cols-1 md:grid-cols-3 gap-4 p-6'>
+					{recipeData?.map((recipe) => (
+						<Card
+							key={recipe.id}
+							imageAlt={recipe.title}
+							imageUrl={recipe.image}
+							title={recipe.title}
+							redirectionLink={`${RouteNames.RECIPE}/${recipe.id}`}
+						/>
+					))}
+				</div>
+			</section>
+
+			<section>
+				<h3 className='text-2xl font-bold dark:text-white'>Vegetarian Recipes</h3>
+				<div className='grid grid-cols-1 md:grid-cols-3 gap-4 p-6'>
+					{recipeData?.map((recipe) => (
+						<Card
+							key={recipe.id}
+							imageAlt={recipe.title}
+							imageUrl={recipe.image}
+							title={recipe.title}
+							redirectionLink={`${RouteNames.RECIPE}/${recipe.id}`}
+						/>
+					))}
+				</div>
+			</section>
+
+			<section>
+				<h3 className='text-2xl font-bold dark:text-white'>Non-Vegetarian Recipes</h3>
+				<div className='grid grid-cols-1 md:grid-cols-3 gap-4 p-6'>
+					{recipeData?.map((recipe) => (
+						<Card
+							key={recipe.id}
+							imageAlt={recipe.title}
+							imageUrl={recipe.image}
+							title={recipe.title}
+							redirectionLink={`${RouteNames.RECIPE}/${recipe.id}`}
+						/>
+					))}
+				</div>
+			</section>
 		</div>
 	);
 };

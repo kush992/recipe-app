@@ -12,6 +12,7 @@ const HomePageBanner = () => {
 					width={1280}
 					objectFit='cover'
 					className='rounded-lg shadow-lg'
+					priority
 				/>
 			</div>
 		</div>
