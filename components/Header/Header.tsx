@@ -12,7 +12,7 @@ export default function Example() {
 				<div className='flex lg:flex-1'>
 					<a href='#' className='-m-1.5 p-1.5'>
 						<span className='sr-only'>Your Company</span>
-						<Image src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600' alt='' className='h-8 w-auto' />
+						<Image src='https://spoonacular.com/cdn/ingredients_100x100/tomato.png' alt='indegrients' width={50} height={50} />
 					</a>
 				</div>
 				<div className='flex lg:hidden'>
@@ -43,7 +43,7 @@ export default function Example() {
 					<div className='flex items-center justify-between'>
 						<a href='#' className='-m-1.5 p-1.5'>
 							<span className='sr-only'>Your Company</span>
-							<Image src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600' alt='' className='h-8 w-auto' />
+							<Image src='https://spoonacular.com/cdn/ingredients_100x100/tomato.png' alt='indegrients' width={50} height={50} />
 						</a>
 						<button type='button' className='-m-2.5 rounded-md p-2.5 text-gray-700' onClick={() => setMobileMenuOpen(false)}>
 							<span className='sr-only'>Close menu</span>

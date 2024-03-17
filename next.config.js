@@ -7,6 +7,6 @@ const nextConfig = {
 module.exports = {
     nextConfig,
     images: {
-        domains: ['spoonacular.com'],
+        domains: ['spoonacular.com', 'tailwindui.com'],
     }
 }
