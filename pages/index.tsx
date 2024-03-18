@@ -3,7 +3,6 @@ import HomePage from '../src/components/HomePage';
 import { RecipeSearch } from '../src/shared/types/RecipeSearch';
 import { DataWithPagination } from '../src/shared/types/DataWithPagination';
 import { baseUrl } from '../src/common/utility';
-import { GetServerSidePropsContext } from 'next';
 
 interface Props {
 	recipeData: RecipeSearch[];
@@ -25,12 +24,8 @@ const Home = ({ recipeData }: Props) => {
 
 export default Home;
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-	context.res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
-
+export async function getServerSideProps() {
 	const response = await fetch(`${baseUrl}/searchRecipeByTime?maxReadyTime=30&limit=3`);
-
-	console.log(`${baseUrl}/searchRecipeByTime?maxReadyTime=30&limit=3`)
 
 	if (!response.ok) {
 		console.error(`Error: ${response.status} - ${response.statusText}`);

@@ -1,7 +1,7 @@
-import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import { baseUrl } from '../../../src/common/utility';
 import { RecipeDetailedInfo } from '../../../src/shared/types/RecipeDetailedInfo';
+import { GetServerSidePropsContext } from 'next';
+import { baseUrl } from '../../../src/common/utility';
 
 interface Props {
 	recipeData: RecipeDetailedInfo;
@@ -34,7 +34,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 			},
 		};
 	}
-	context.res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
 
 	const { recipeId } = params;
 	const response = await fetch(`${baseUrl}/getRecipeById?id=${recipeId}`);

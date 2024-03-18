@@ -1,5 +1,5 @@
 export const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
-export const baseUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000';
+export const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const fetchRecipe = async (query: string) => {
 	const response = fetch(`/api/fetchRecipe?query=${query}`);
