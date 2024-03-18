@@ -1,9 +1,6 @@
 import React from 'react';
-import Image from 'next/image';
 import HomePageBanner from './HomePageBanner';
 import { RecipeSearch } from '../../shared/types/RecipeSearch';
-import Card from '../../shared/components/Card';
-import { RouteNames } from '../../shared/Enums/RouteNames';
 import HomePageSection from './HomePageSections';
 
 interface Props {
