@@ -25,7 +25,8 @@ const Home = ({ recipeData }: Props) => {
 export default Home;
 
 export async function getServerSideProps() {
-	const response = await fetch(`${baseUrl}/searchRecipeByTime?maxReadyTime=30&limit=3`);
+	const response = await fetch(`${baseUrl()}/api/searchRecipeByTime?maxReadyTime=30&limit=3`);
+	console.log(`${baseUrl()}/api/searchRecipeByTime?maxReadyTime=30&limit=3`);
 
 	if (!response.ok) {
 		console.error(`Error: ${response.status} - ${response.statusText}`);
