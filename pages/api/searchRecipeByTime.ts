@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { API_KEY } from '../../src/common/utility';
+
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 const cache = new Map();
 
