@@ -3,12 +3,16 @@ import HomePage from '../src/components/HomePage';
 import { RecipeSearch } from '../src/shared/types/RecipeSearch';
 import { DataWithPagination } from '../src/shared/types/DataWithPagination';
 import { baseUrl } from '../src/common/utility';
+import { ApiRoutes } from '../src/shared/Enums/ApiRoutes';
 
 interface Props {
-	recipeData: RecipeSearch[];
+	timeSensitiveRecipes: RecipeSearch[];
+	ketoRecipes: RecipeSearch[];
+	vegetarianRecipes: RecipeSearch[];
+	nonVegetarianRecipes: RecipeSearch[];
 }
 
-const Home = ({ recipeData }: Props) => {
+const Home = ({ timeSensitiveRecipes, ketoRecipes, vegetarianRecipes, nonVegetarianRecipes }: Props) => {
 	return (
 		<div className='max-w-7xl mx-auto mt-2 p-6'>
 			<Head>
@@ -17,7 +21,12 @@ const Home = ({ recipeData }: Props) => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<HomePage recipeData={recipeData} />
+			<HomePage
+				timeSensitiveRecipes={timeSensitiveRecipes}
+				ketoRecipes={ketoRecipes}
+				vegetarianRecipes={vegetarianRecipes}
+				nonVegetarianRecipes={nonVegetarianRecipes}
+			/>
 		</div>
 	);
 };
@@ -25,24 +34,50 @@ const Home = ({ recipeData }: Props) => {
 export default Home;
 
 export async function getServerSideProps() {
-	const response = await fetch(`${baseUrl()}/api/searchRecipeByTime?maxReadyTime=30&limit=3`);
-	console.log(`${baseUrl()}/api/searchRecipeByTime?maxReadyTime=30&limit=3`);
+	try {
+		const [timeSensitiveRecipesResponse, ketoRecipesResponse, vegetarianRecipesResponse, nonvegetarianRecipesResponse] = await Promise.all([
+			fetch(`${baseUrl()}${ApiRoutes.SEARCH_RECIPE_BY_TIME}?maxReadyTime=30&limit=3`),
+			fetch(`${baseUrl()}${ApiRoutes.SEARCH_RECIPE_BY_DIET}?diet=ketogenic&limit=3`),
+			fetch(`${baseUrl()}${ApiRoutes.SEARCH_RECIPE_BY_DIET}?diet=vegetarian&limit=3`),
+			fetch(`${baseUrl()}${ApiRoutes.SEARCH_RECIPE_BY_DIET}?diet=whole30&limit=10&includeIngredients=chicken`),
+		]);
 
-	if (!response.ok) {
-		console.error(`Error: ${response.status} - ${response.statusText}`);
+		if (!timeSensitiveRecipesResponse.ok) {
+			throw new Error(`Error: ${timeSensitiveRecipesResponse.status} - ${timeSensitiveRecipesResponse.statusText}`);
+		}
+		if (!ketoRecipesResponse.ok) {
+			throw new Error(`Error: ${ketoRecipesResponse.status} - ${ketoRecipesResponse.statusText}`);
+		}
+		if (!vegetarianRecipesResponse.ok) {
+			throw new Error(`Error: ${vegetarianRecipesResponse.status} - ${vegetarianRecipesResponse.statusText}`);
+		}
+		if (!nonvegetarianRecipesResponse.ok) {
+			throw new Error(`Error: ${nonvegetarianRecipesResponse.status} - ${nonvegetarianRecipesResponse.statusText}`);
+		}
+
+		const timeSensitiveRecipes: DataWithPagination<RecipeSearch> = await timeSensitiveRecipesResponse.json();
+		const ketoRecipes: DataWithPagination<RecipeSearch> = await ketoRecipesResponse.json();
+		const vegetarianRecipes: DataWithPagination<RecipeSearch> = await vegetarianRecipesResponse.json();
+		const nonVegetarianRecipes: DataWithPagination<RecipeSearch> = await nonvegetarianRecipesResponse.json();
+
 		return {
 			props: {
-				error: `Error: ${response.status} - ${response.statusText}`,
-				recipeData: [],
+				timeSensitiveRecipes: timeSensitiveRecipes.results,
+				ketoRecipes: ketoRecipes.results,
+				vegetarianRecipes: vegetarianRecipes.results,
+				nonVegetarianRecipes: nonVegetarianRecipes.results,
+			},
+		};
+	} catch (error) {
+		console.error(error);
+		return {
+			props: {
+				error: 'An error occurred',
+				timeSensitiveRecipes: [],
+				ketoRecipes: [],
+				vegetarianRecipes: [],
+				nonVegetarianRecipes: [],
 			},
 		};
 	}
-
-	const recipeData: DataWithPagination<RecipeSearch> = await response.json();
-
-	return {
-		props: {
-			recipeData: recipeData.results,
-		},
-	};
 }

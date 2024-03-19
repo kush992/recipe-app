@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { RecipeDetailedInfo } from '../../../src/shared/types/RecipeDetailedInfo';
 import { GetServerSidePropsContext } from 'next';
 import { baseUrl } from '../../../src/common/utility';
+import { ApiRoutes } from '../../../src/shared/Enums/ApiRoutes';
 
 interface Props {
 	recipeData: RecipeDetailedInfo;
@@ -36,8 +37,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 	}
 
 	const { recipeId } = params;
-	const response = await fetch(`${baseUrl()}/api/getRecipeById?id=${recipeId}`);
-	console.log(`${baseUrl()}/api/getRecipeById?id=${recipeId}`)
+	const response = await fetch(`${baseUrl()}${ApiRoutes.GET_RECIPE_BY_ID}?id=${recipeId}`);
 
 	if (!response.ok) {
 		console.error(`Error: ${response.status} - ${response.statusText}`);

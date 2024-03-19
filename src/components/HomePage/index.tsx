@@ -4,21 +4,24 @@ import { RecipeSearch } from '../../shared/types/RecipeSearch';
 import HomePageSection from './HomePageSections';
 
 interface Props {
-	recipeData: RecipeSearch[];
+	timeSensitiveRecipes: RecipeSearch[];
+	ketoRecipes: RecipeSearch[];
+	vegetarianRecipes: RecipeSearch[];
+	nonVegetarianRecipes: RecipeSearch[];
 }
 
-const HomePage = ({ recipeData }: Props) => {
+const HomePage = ({ timeSensitiveRecipes, ketoRecipes, vegetarianRecipes, nonVegetarianRecipes }: Props) => {
 	return (
 		<div>
 			<HomePageBanner />
 
-			<HomePageSection recipeData={recipeData} sectionTitle='Recipes under 30mins' />
+			<HomePageSection recipeData={timeSensitiveRecipes} sectionTitle='Recipes under 30mins' />
 
-			<HomePageSection recipeData={recipeData} sectionTitle='Vegan Recipes' />
+			<HomePageSection recipeData={ketoRecipes} sectionTitle='Keto Recipes' />
 
-			<HomePageSection recipeData={recipeData} sectionTitle='Vegetarian Recipes' />
+			<HomePageSection recipeData={vegetarianRecipes} sectionTitle='Vegetarian Recipes' />
 
-			<HomePageSection recipeData={recipeData} sectionTitle='Non-Vegetarian Recipes' />
+			<HomePageSection recipeData={nonVegetarianRecipes} sectionTitle='Non-Vegetarian Recipes' />
 		</div>
 	);
 };
