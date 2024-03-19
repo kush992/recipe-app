@@ -3,6 +3,7 @@ import { RecipeDetailedInfo } from '../../../src/shared/types/RecipeDetailedInfo
 import { GetServerSidePropsContext } from 'next';
 import { baseUrl } from '../../../src/common/utility';
 import { ApiRoutes } from '../../../src/shared/Enums/ApiRoutes';
+import RecipePage from '../../../src/components/RecipePage';
 
 interface Props {
 	recipeData: RecipeDetailedInfo;
@@ -17,8 +18,7 @@ const Recipe = ({ recipeData }: Props) => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			{recipeData.title}
-			<div dangerouslySetInnerHTML={{ __html: recipeData.instructions }} />
+			<RecipePage />
 		</div>
 	);
 };
