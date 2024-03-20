@@ -17,7 +17,7 @@ const RecipePage = ({ recipeData }: Props) => {
 				<h2 className='mb-1 text-md text-gray-900 dark:text-white'>
 					By &nbsp;
 					<a href={recipeData.sourceUrl} className='underline uppercase' target='__blank'>
-						{recipeData.sourceName}{' '}
+						{recipeData.sourceName}
 					</a>
 				</h2>
 				<div className='flex flex-wrap'>
