@@ -18,7 +18,7 @@ const Recipe = ({ recipeData }: Props) => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<RecipePage />
+			<RecipePage recipeData={recipeData} />
 		</div>
 	);
 };
