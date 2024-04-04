@@ -4,6 +4,7 @@ import { GetServerSidePropsContext } from 'next';
 import { baseUrl } from '../../../src/common/utility';
 import { ApiRoutes } from '../../../src/shared/Enums/ApiRoutes';
 import RecipePage from '../../../src/components/RecipePage';
+import Breadcrumbs from '../../../src/shared/components/Breadcrumbs';
 
 interface Props {
 	recipeData: RecipeDetailedInfo;
@@ -18,6 +19,7 @@ const Recipe = ({ recipeData }: Props) => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
+			<Breadcrumbs />
 			<RecipePage recipeData={recipeData} />
 		</div>
 	);

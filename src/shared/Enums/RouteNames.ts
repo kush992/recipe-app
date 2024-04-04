@@ -4,4 +4,5 @@ export enum RouteNames {
 	RECIPE = '/recipe',
 	NOT_FOUND = '/404',
 	ABOUT = '/about',
+	JOIN = '/join',
 }

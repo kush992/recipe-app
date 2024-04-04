@@ -4,6 +4,7 @@ import { RecipeSearch } from '../src/shared/types/RecipeSearch';
 import { DataWithPagination } from '../src/shared/types/DataWithPagination';
 import { baseUrl } from '../src/common/utility';
 import { ApiRoutes } from '../src/shared/Enums/ApiRoutes';
+import Breadcrumbs from '../src/shared/components/Breadcrumbs';
 
 interface Props {
 	timeSensitiveRecipes: RecipeSearch[];
