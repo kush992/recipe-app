@@ -9,11 +9,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	// If the data is in the cache, use it
 	if (cache.has(URL)) {
+		console.log('Cache hit', { URL });
 		res.status(200).json(cache.get(URL));
 		return;
 	}
 
 	const response = await fetch(URL);
+	console.log('Cache miss', { URL });
 
 	if (!response.ok) {
 		console.error(`Error: ${response.status} - ${response.statusText}`);
