@@ -9,7 +9,7 @@ const Footer = () => {
 				<div className='md:flex md:justify-between'>
 					<div className='mb-6 md:mb-0'>
 						<Link href='https://kushbhalodi.com/' target='__blank' className='flex items-center'>
-							<div>
+							<div className='flex items-center gap-4'>
 								<Image src='https://spoonacular.com/cdn/ingredients_100x100/tomato.png' alt='indegrients' width={50} height={50} />
 								<span className='self-center text-2xl font-semibold whitespace-nowrap dark:text-white'>KushBhalodi Recipes</span>
 							</div>

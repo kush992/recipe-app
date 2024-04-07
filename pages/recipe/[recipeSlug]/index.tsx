@@ -38,7 +38,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 		};
 	}
 
-	const { recipeId } = params;
+	const { recipeSlug } = params;
+	const recipeId = recipeSlug?.toString().split('-')[0];
 	const response = await fetch(`${baseUrl()}${ApiRoutes.GET_RECIPE_BY_ID}?id=${recipeId}`);
 
 	if (!response.ok) {

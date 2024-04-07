@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '../../../shared/components/Card';
 import { RecipeSearch } from '../../../shared/types/RecipeSearch';
 import { RouteNames } from '../../../shared/Enums/RouteNames';
+import { transformStringForURL } from '../../../common/utility';
 
 type Props = {
 	recipeData: RecipeSearch[];
@@ -19,7 +20,7 @@ const HomePageSection = ({ recipeData, sectionTitle }: Props) => {
 						imageAlt={recipe.title}
 						imageUrl={recipe.image}
 						title={recipe.title}
-						redirectionLink={`${RouteNames.RECIPE}/${recipe.id}`}
+						redirectionLink={`${RouteNames.RECIPE}/${recipe.id}-${transformStringForURL(recipe.title)}`}
 					/>
 				))}
 			</div>

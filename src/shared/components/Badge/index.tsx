@@ -21,7 +21,7 @@ const badgeClasses: Record<BadgeType, string> = {
 const Badge = ({ title, type }: Props) => {
 	return (
 		<div>
-			<span className={`text-sm font-medium me-2 px-2.5 py-0.5 rounded ${badgeClasses[type]}`}>{title}</span>
+			<span className={`text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase ${badgeClasses[type]}`}>{title}</span>
 		</div>
 	);
 };
