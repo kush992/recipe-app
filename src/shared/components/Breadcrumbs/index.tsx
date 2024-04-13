@@ -6,6 +6,7 @@ import { ChevronRightIcon } from '@heroicons/react/24/outline';
 const Breadcrumbs = () => {
 	const router = useRouter();
 	const pathSegments = router.asPath.split('/').filter((segment) => segment);
+	const purifyString = (string: string) => string.replace(/[^a-zA-Z\s]/g, ' ').trim();
 
 	return (
 		<Breadcrumb separator={<ChevronRightIcon color='grey' height={12} width={12} />} className='pb-8'>
@@ -17,7 +18,7 @@ const Breadcrumbs = () => {
 			{pathSegments.map((segment, index) => (
 				<BreadcrumbItem key={index}>
 					<BreadcrumbLink href={`/${pathSegments.slice(0, index + 1).join('/')}`} className=' opacity-75 uppercase text-xs'>
-						{segment}
+						{purifyString(segment)}
 					</BreadcrumbLink>
 				</BreadcrumbItem>
 			))}
