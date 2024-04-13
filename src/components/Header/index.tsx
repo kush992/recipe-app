@@ -4,14 +4,15 @@ import { Dialog, Popover } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { RouteNames } from '../../shared/Enums/RouteNames';
+import SearchBar from '../../shared/components/SearchBar';
 
 export default function Example() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 	return (
 		<header className='bg-white dark:bg-[#01040A] shadow-lg sticky top-0 z-[999] border-b border-gray-200 sm:mx-auto dark:border-gray-700'>
-			<nav className='mx-auto flex max-w-7xl items-center justify-between p-4' aria-label='Global'>
-				<div className='flex lg:flex-1 cursor-pointer'>
+			<nav className='mx-auto gap-2 flex max-w-7xl items-center justify-between p-4' aria-label='Global'>
+				<div className='flex  cursor-pointer'>
 					<Link href={RouteNames.HOME} className='-m-1.5 p-1.5 cursor-pointer'>
 						<div>
 							<span className='sr-only'>Kush Bhalodi Recipes</span>
@@ -19,6 +20,7 @@ export default function Example() {
 						</div>
 					</Link>
 				</div>
+				<SearchBar />
 				<div className='flex lg:hidden'>
 					<button
 						type='button'
@@ -67,19 +69,21 @@ export default function Example() {
 									href={RouteNames.SEARCH}
 									className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 dark:text-white hover:bg-gray-50'
 								>
-									Search
+									<span onClick={() => setMobileMenuOpen(false)}>Search</span>
 								</Link>
 								<Link
 									href={RouteNames.JOIN}
+									onClick={() => setMobileMenuOpen(false)}
 									className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 dark:text-white hover:bg-gray-50'
 								>
-									Join
+									<span onClick={() => setMobileMenuOpen(false)}>Join</span>
 								</Link>
 								<Link
 									href={RouteNames.ABOUT}
+									onClick={() => setMobileMenuOpen(false)}
 									className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 dark:text-white hover:bg-gray-50'
 								>
-									About
+									<span onClick={() => setMobileMenuOpen(false)}>About</span>
 								</Link>
 							</div>
 						</div>

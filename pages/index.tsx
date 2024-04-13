@@ -11,9 +11,10 @@ interface Props {
 	ketoRecipes: RecipeSearch[];
 	vegetarianRecipes: RecipeSearch[];
 	nonVegetarianRecipes: RecipeSearch[];
+	error: string
 }
 
-const Home = ({ timeSensitiveRecipes, ketoRecipes, vegetarianRecipes, nonVegetarianRecipes }: Props) => {
+const Home = ({ timeSensitiveRecipes, ketoRecipes, vegetarianRecipes, nonVegetarianRecipes, error }: Props) => {
 	return (
 		<div className='max-w-7xl mx-auto mt-2 p-6'>
 			<Head>
@@ -23,6 +24,7 @@ const Home = ({ timeSensitiveRecipes, ketoRecipes, vegetarianRecipes, nonVegetar
 			</Head>
 
 			<HomePage
+			error={error}
 				timeSensitiveRecipes={timeSensitiveRecipes}
 				ketoRecipes={ketoRecipes}
 				vegetarianRecipes={vegetarianRecipes}
