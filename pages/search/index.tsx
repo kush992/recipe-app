@@ -5,6 +5,7 @@ import { baseUrl } from '../../src/common/utility';
 import { ApiRoutes } from '../../src/shared/Enums/ApiRoutes';
 import SearchPage from '../../src/components/SearchPage';
 import { SearchResult, SearchResultData, SearchResultsResponse } from '../../src/shared/types/RecipeSearchResults';
+import { DataWithPagination } from '../../src/shared/types/DataWithPagination';
 
 interface Props {
 	searchRecipesData: SearchResultData[];
@@ -16,7 +17,7 @@ interface Props {
 
 const Search = (props: Props) => {
 	return (
-		<div className='max-w-7xl mx-auto mt-2 p-6 h-[80vh]'>
+		<div className='max-w-7xl mx-auto mt-2 p-6'>
 			<Breadcrumbs />
 
 			{props?.isFetching && <h3>Loading...</h3>}
@@ -39,7 +40,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 		};
 	}
 
-	const searchQuery = query?.toString() || '';
+	const searchQuery = query?.query?.toString() || '';
+	console.log('searchQuery >>>>>>>>>>>>>>', query)
 
 	try {
 		const response = await fetch(`${baseUrl()}${ApiRoutes.SEARCH_RECIPES}?searchQuery=${searchQuery}`);
@@ -53,32 +55,34 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 				},
 			};
 		}
-		const recipeData: SearchResultsResponse = await response.json();
+		const recipeData: DataWithPagination<SearchResult[]> = await response.json();
 
-		const recipes = recipeData?.searchResults
-			?.filter((recipe: SearchResult) => {
-				recipe.name === 'Recipes';
-			})
-			.map((recipe: SearchResult) => recipe.results)
-			.flat();
+		// console.log(recipeData)
 
-		const simpleFoods = recipeData?.searchResults
-			?.filter((recipe: SearchResult) => {
-				recipe.name === 'Simple Foods';
-			})
-			?.map((recipe: SearchResult) => recipe.results)
-			.flat();
+		// const recipes = recipeData?.searchResults
+		// 	?.filter((recipe: SearchResult) => {
+		// 		recipe.name === 'Recipes';
+		// 	})
+		// 	.map((recipe: SearchResult) => recipe.results)
+		// 	.flat();
 
-		const videos = recipeData?.searchResults
-			.filter((recipe) => recipe.name === 'Videos')
-			.map((recipe) => recipe.results)
-			.flat();
+		// const simpleFoods = recipeData?.searchResults
+		// 	?.filter((recipe: SearchResult) => {
+		// 		recipe.name === 'Simple Foods';
+		// 	})
+		// 	?.map((recipe: SearchResult) => recipe.results)
+		// 	.flat();
+
+		// const videos = recipeData?.searchResults
+		// 	.filter((recipe) => recipe.name === 'Videos')
+		// 	.map((recipe) => recipe.results)
+		// 	.flat();
 
 		return {
 			props: {
-				searchRecipesData: recipes,
-				simpleFoodsData: simpleFoods,
-				videosData: videos,
+				searchRecipesData: recipeData.results,
+				simpleFoodsData:[],
+				videosData: [],
 				error: '',
 			},
 		};

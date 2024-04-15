@@ -37,21 +37,21 @@ const PATH_DELIMITER = '-';
 
 export const transformStringForURL = (string: string) =>
 	string
-		.normalize('NFD')
-		.replace(/[\u0300-\u036f]/g, '')
+		?.normalize('NFD')
+		?.replace(/[\u0300-\u036f]/g, '')
 		// Remove whitespaces from start and end
-		.trim()
+		?.trim()
 		// Replace all'-' and ',' chars with a space
-		.replace(/[-,]/g, ' ')
+		?.replace(/[-,]/g, ' ')
 		// Replace spaces+ with '-' delimiter
-		.replace(/\s+/g, PATH_DELIMITER);
+		?.replace(/\s+/g, PATH_DELIMITER);
 
 export const revertTransformStringForURL = (string: string, PATH_DELIMITER: string) =>
 	string
 		// Replace '-' delimiter with a space
-		.replace(new RegExp(PATH_DELIMITER, 'g'), ' ')
+		?.replace(new RegExp(PATH_DELIMITER, 'g'), ' ')
 		// Replace spaces with ','
-		.replace(/\s/g, ',')
+		?.replace(/\s/g, ',')
 		// Add whitespaces to start and end
-		.trimStart()
-		.trimEnd();
+		?.trimStart()
+		?.trimEnd();
